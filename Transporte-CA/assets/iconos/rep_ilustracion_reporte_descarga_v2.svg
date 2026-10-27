@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 300" fill="none">
+  <defs>
+    <linearGradient id="halo" x1="65" y1="40" x2="290" y2="260" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7E5C9"/><stop offset="1" stop-color="#EAD2AD"/>
+    </linearGradient>
+    <linearGradient id="paper" x1="100" y1="35" x2="250" y2="245" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFCF5"/><stop offset="1" stop-color="#F4E5CD"/>
+    </linearGradient>
+    <linearGradient id="green" x1="226" y1="184" x2="283" y2="258" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#356A4D"/><stop offset="1" stop-color="#073626"/>
+    </linearGradient>
+    <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#82945B"/><stop offset="1" stop-color="#294B30"/>
+    </linearGradient>
+    <filter id="shadow" x="20" y="10" width="320" height="290" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+  </defs>
+  <!-- soft warm halo -->
+  <ellipse cx="180" cy="155" rx="133" ry="116" fill="url(#halo)" opacity=".68"/>
+  <ellipse cx="180" cy="155" rx="118" ry="103" fill="#FFF8ED" opacity=".42"/>
+  <!-- left botanical branches -->
+  <g stroke="#647849" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M67 244C48 204 51 148 76 105"/>
+    <path d="M61 201C38 182 34 159 40 139C58 149 68 169 61 201Z" fill="url(#leaf)"/>
+    <path d="M65 177C83 159 89 137 82 117C65 132 58 151 65 177Z" fill="url(#leaf)"/>
+    <path d="M58 225C35 213 26 194 29 176C49 184 60 201 58 225Z" fill="url(#leaf)"/>
+    <path d="M72 151C88 133 91 111 82 94C67 111 64 131 72 151Z" fill="url(#leaf)"/>
+    <path d="M59 201 42 147M66 174 81 119M56 222 34 184" opacity=".65" stroke-width="1.2"/>
+    <path d="M293 244C311 205 309 151 286 109"/>
+    <path d="M299 202C321 185 326 162 319 142C301 153 292 172 299 202Z" fill="url(#leaf)"/>
+    <path d="M294 177C276 160 270 138 278 119C294 135 301 154 294 177Z" fill="url(#leaf)"/>
+    <path d="M302 226C324 214 333 195 329 177C309 186 300 204 302 226Z" fill="url(#leaf)"/>
+    <path d="M287 151C271 134 267 112 276 96C291 113 295 132 287 151Z" fill="url(#leaf)"/>
+    <path d="M300 201 318 150M293 175 278 121M304 223 325 185" opacity=".65" stroke-width="1.2"/>
+  </g>
+  <!-- soft shadow behind sheets -->
+  <path d="M111 49 244 68Q254 70 252 82L227 235Q225 247 213 245L86 225Z" fill="#9C7D50" opacity=".16" filter="url(#shadow)"/>
+  <!-- back report sheet -->
+  <g transform="rotate(7 190 145)">
+    <rect x="99" y="40" width="151" height="204" rx="13" fill="#E7D2B2"/>
+    <rect x="89" y="32" width="151" height="204" rx="13" fill="#F4E6D0" stroke="#E8D3B4" stroke-width="1.5"/>
+    <path d="M111 61H175M111 80H166M111 99H148" stroke="#D5C2A5" stroke-width="5.5" stroke-linecap="round"/>
+  </g>
+  <!-- front report sheet -->
+  <g transform="rotate(8 162 143)">
+    <rect x="77" y="25" width="151" height="207" rx="12" fill="url(#paper)" stroke="#E8D4B7" stroke-width="1.8"/>
+    <path d="M99 51H165M99 68H153M99 85H132" stroke="#D9C7AE" stroke-width="5.5" stroke-linecap="round"/>
+    <path d="M103 191H209" stroke="#D5C2A7" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="111" y="162" width="14" height="29" rx="1.5" fill="#B8B17A"/>
+    <rect x="135" y="140" width="14" height="51" rx="1.5" fill="#32654F"/>
+    <rect x="159" y="121" width="14" height="70" rx="1.5" fill="#17503D"/>
+    <rect x="183" y="102" width="14" height="89" rx="1.5" fill="#D29B56"/>
+  </g>
+  <!-- download badge overlapping lower right -->
+  <circle cx="246" cy="222" r="36" fill="#F8F0E2"/>
+  <circle cx="246" cy="222" r="33.5" fill="url(#green)"/>
+  <path d="M246 201V235M234 224.5 246 236.5 258 224.5M233 244H259" stroke="#FFF9EE" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

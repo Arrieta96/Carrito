@@ -1,0 +1,2262 @@
+:root {
+  --cream: #f5eee2;
+  --paper: #fffaf3;
+  --green: #173c30;
+  --gold: #c29456;
+  --ink: #111c31;
+  --muted: #7d7d78;
+  --line: rgba(88, 75, 53, 0.12);
+  --shadow: 0 9px 25px rgba(67, 54, 35, 0.09);
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  min-height: 100%;
+  background: #eae3d8;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  font-family:
+    "DM Sans",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  background: var(--cream);
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+#app {
+  position: relative;
+  width: 100%;
+  max-width: 430px;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding-bottom: calc(100px + env(safe-area-inset-bottom));
+  overflow: hidden;
+  background: linear-gradient(160deg, #f7f1e8, #eee4d5);
+}
+
+.screen {
+  display: none;
+  min-height: 100dvh;
+  animation: screen-in 0.2s ease-out;
+}
+
+.screen.active {
+  display: block;
+}
+
+@keyframes screen-in {
+  from {
+    opacity: 0.65;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* INICIO */
+
+.home-screen {
+  padding-bottom: 12px;
+}
+
+.home-hero {
+  position: relative;
+  height: 530px;
+  overflow: hidden;
+  color: white;
+  background: #263d49;
+}
+
+.hero-photo,
+.hero-shade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-photo {
+  object-fit: cover;
+  object-position: center 48%;
+}
+
+.hero-shade {
+  background:
+    linear-gradient(180deg, rgba(12, 28, 42, 0.4), transparent 30%),
+    linear-gradient(0deg, rgba(8, 20, 25, 0.82), transparent 58%);
+}
+
+.hero-header {
+  position: absolute;
+  z-index: 1;
+  top: max(40px, env(safe-area-inset-top));
+  left: 22px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.truck-symbol {
+  width: 48px;
+  height: 42px;
+  object-fit: contain;
+}
+
+.hero-brand {
+  display: grid;
+  gap: 2px;
+  flex: 1;
+}
+.hero-brand strong {
+  font-size: 16px;
+  font-weight: 600;
+}
+.hero-brand span {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.notification-button {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.13);
+  backdrop-filter: blur(12px);
+}
+
+.notification-button img {
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
+}
+
+.hero-copy {
+  position: absolute;
+  left: 23px;
+  bottom: 35px;
+}
+.hero-greeting {
+  margin: 0;
+  font-size: clamp(38px, 10vw, 47px);
+  font-weight: 600;
+  line-height: 0.99;
+  letter-spacing: -1.7px;
+}
+.hero-tagline {
+  margin: 10px 0 0;
+  font-size: 20px;
+  line-height: 1.25;
+}
+
+.home-content {
+  position: relative;
+  z-index: 2;
+  margin-top: -4px;
+  padding: 0 15px;
+}
+.home-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.home-action {
+  width: 100%;
+  min-height: 96px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 12px 13px;
+  text-align: left;
+  color: var(--ink);
+  background: rgba(255, 250, 243, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 23px;
+  box-shadow: 0 8px 22px rgba(35, 35, 25, 0.1);
+}
+
+.home-action:active {
+  transform: scale(0.985);
+}
+
+.home-action-icon {
+  width: 66px;
+  height: 66px;
+  flex: 0 0 66px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 18px;
+}
+
+.home-action-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.green-tile {
+  color: white;
+  background: linear-gradient(145deg, #315b48, #102e23);
+}
+.gold-tile {
+  background: linear-gradient(145deg, #eac58d, #bd8d4d);
+}
+.sand-tile {
+  background: linear-gradient(145deg, #c8b18b, #9e855c);
+}
+
+.plus-large {
+  font-size: 43px;
+  line-height: 1;
+  font-weight: 300;
+}
+
+.home-action-copy {
+  min-width: 0;
+  flex: 1;
+}
+.home-action-copy strong {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 15px;
+  font-weight: 700;
+}
+.home-action-copy small {
+  display: block;
+  color: #686b6b;
+  font-size: 11px;
+  line-height: 1.45;
+}
+.action-arrow {
+  color: #142b26;
+  font-size: 27px;
+}
+
+.road-banner {
+  position: relative;
+  height: 105px;
+  overflow: hidden;
+  margin: 11px -15px 0;
+  background: #293b36;
+}
+
+.road-banner > img,
+.road-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.road-banner > img {
+  object-fit: cover;
+  object-position: center 70%;
+}
+.road-overlay {
+  background: linear-gradient(
+    90deg,
+    rgba(12, 29, 24, 0.72),
+    rgba(12, 29, 24, 0.04)
+  );
+}
+
+.road-caption {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 24px;
+  color: white;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.road-caption img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+/* ENCABEZADOS */
+
+.inner-screen {
+  padding: max(42px, env(safe-area-inset-top)) 19px 32px;
+}
+
+.page-header {
+  position: relative;
+  min-height: 37px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 26px;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.back-button {
+  position: absolute;
+  left: -7px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 39px;
+  height: 39px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font-size: 36px;
+  font-weight: 300;
+}
+
+/* REGISTRO */
+
+.register-form {
+  display: grid;
+  gap: 22px;
+}
+
+.date-panel {
+  padding: 16px 7px 0;
+  border-radius: 23px;
+  background: rgba(255, 251, 245, 0.74);
+}
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 0 10px 13px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.section-label img {
+  width: 29px;
+  height: 29px;
+  object-fit: contain;
+}
+
+#fecha {
+  width: 100%;
+  min-height: 57px;
+  padding: 0 14px;
+  border: 1px solid rgba(120, 99, 69, 0.1);
+  border-radius: 17px;
+  color: var(--ink);
+  background: #fffdf9;
+  box-shadow: 0 5px 14px rgba(65, 52, 36, 0.04);
+}
+
+.day-preview {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-height: 111px;
+  overflow: hidden;
+  margin-top: 10px;
+  padding: 13px;
+  border-radius: 19px;
+  background: #f2e4cf;
+}
+
+.day-landscape {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.58;
+}
+
+.day-preview::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    #f8e9d4 0%,
+    rgba(248, 233, 212, 0.96) 50%,
+    rgba(248, 233, 212, 0.13) 100%
+  );
+}
+
+.day-badge,
+.day-copy {
+  position: relative;
+  z-index: 1;
+}
+
+.day-badge {
+  width: 60px;
+  height: 78px;
+  flex: 0 0 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  border-radius: 14px;
+  background: rgba(255, 250, 241, 0.96);
+  color: #765024;
+  box-shadow: 0 4px 12px rgba(91, 64, 35, 0.08);
+}
+
+.day-badge span {
+  font-size: 11px;
+  font-weight: 600;
+}
+.day-badge strong {
+  font-size: 27px;
+  line-height: 1;
+}
+.day-copy {
+  display: grid;
+  gap: 3px;
+}
+.day-copy > span {
+  font-size: 13px;
+}
+.day-copy strong {
+  font-size: 20px;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+.day-copy small {
+  font-size: 11px;
+  color: #4d4a42;
+}
+
+.section-title {
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 700;
+}
+.service-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 11px;
+}
+
+/* TARJETAS COMPLETAS DE SERVICIO */
+
+.service-option {
+  position: relative;
+  min-width: 0;
+  padding: 0;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  border: 1.5px solid transparent;
+  border-radius: 21px;
+  background: transparent;
+  box-shadow: 0 6px 16px rgba(73, 58, 38, 0.05);
+  transition:
+    border-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.service-option > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.service-option.selected {
+  border-color: var(--green);
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.8),
+    0 8px 19px rgba(25, 58, 44, 0.13);
+}
+
+.service-option:active {
+  transform: scale(0.985);
+}
+
+/* El check se dibuja por separado; no está dentro del PNG base. */
+.service-check {
+  position: absolute;
+  top: 9%;
+  right: 9%;
+  width: 25px;
+  height: 25px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fffaf0;
+  border-radius: 50%;
+  background: #fffaf0;
+  color: var(--green);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.12);
+}
+
+.service-option.selected .service-check {
+  display: flex;
+}
+
+.amount-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+}
+.amount-heading .section-title {
+  margin-bottom: 12px;
+}
+.amount-heading > span {
+  color: #6f706b;
+  font-size: 11px;
+}
+
+.amount-panel {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  min-height: 91px;
+  padding: 14px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 22px;
+  background: linear-gradient(135deg, #fffaf2, #f2e5d3);
+  box-shadow: var(--shadow);
+}
+
+.amount-panel > img {
+  width: 65px;
+  height: 65px;
+  object-fit: contain;
+}
+.amount-panel > div {
+  display: grid;
+  gap: 3px;
+}
+.amount-panel strong {
+  font-size: 26px;
+  letter-spacing: -0.9px;
+}
+.amount-panel span {
+  color: #66665e;
+  font-size: 14px;
+}
+
+.primary-button {
+  width: 100%;
+  min-height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 15px 10px 20px;
+  border: 0;
+  border-radius: 22px;
+  background: linear-gradient(115deg, #315947, #102f24);
+  color: #fffdf6;
+  font-size: 15px;
+  font-weight: 600;
+  box-shadow: 0 9px 20px rgba(26, 59, 45, 0.18);
+}
+
+.primary-button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+.button-arrow {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  margin-left: auto;
+  border-radius: 50%;
+  background: #f0e2c2;
+  color: #203a2d;
+  font-size: 30px;
+}
+
+.form-message {
+  min-height: 15px;
+  margin: -13px 2px 0;
+  color: var(--green);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* MES Y VIAJES */
+
+.month-picker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 57px;
+  padding: 0 15px;
+  margin-bottom: 17px;
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 19px;
+  background: rgba(255, 251, 245, 0.88);
+  box-shadow: 0 7px 19px rgba(60, 48, 32, 0.07);
+}
+
+.month-picker img {
+  width: 27px;
+  height: 27px;
+  object-fit: contain;
+}
+.month-picker input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font-size: 15px;
+}
+
+.trip-list {
+  display: grid;
+  gap: 8px;
+}
+
+.trip-row {
+  display: grid;
+  grid-template-columns: 49px 34px minmax(0, 1fr) auto 13px;
+  align-items: center;
+  gap: 8px;
+  min-height: 62px;
+  padding: 7px 9px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 17px;
+  background: rgba(255, 251, 245, 0.85);
+}
+
+.trip-date {
+  min-height: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 13px;
+  background: #f4e8d5;
+}
+
+.trip-date small {
+  font-size: 9px;
+  text-transform: uppercase;
+}
+.trip-date strong {
+  font-size: 18px;
+  line-height: 1.1;
+}
+.trip-service-icon {
+  width: 31px;
+  height: 31px;
+  object-fit: contain;
+}
+.trip-description {
+  min-width: 0;
+}
+.trip-description strong {
+  display: block;
+  font-size: 12px;
+}
+.trip-description small {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 10px;
+}
+.trip-amount {
+  font-size: 11px;
+  white-space: nowrap;
+}
+.trip-chevron {
+  font-size: 20px;
+  color: var(--green);
+}
+
+.empty-state {
+  padding: 28px 17px;
+  border: 1px dashed rgba(110, 91, 62, 0.25);
+  border-radius: 18px;
+  color: var(--muted);
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.monthly-total {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 7px 12px;
+  margin-top: 17px;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  background: rgba(255, 251, 245, 0.88);
+}
+
+.monthly-total > span {
+  color: #77776f;
+  font-size: 12px;
+}
+.monthly-total > strong {
+  color: var(--green);
+  text-align: right;
+  font-size: 17px;
+}
+.monthly-total-divider {
+  grid-column: 1 / -1;
+  height: 1px;
+  margin: 5px 0;
+  background: var(--line);
+}
+
+/* =========================================================
+   REPORTE — estilos específicos, basados en la referencia
+   Solo afecta a #reporte.
+   ========================================================= */
+
+#reporte.report-screen {
+  padding: max(28px, env(safe-area-inset-top)) 17px 112px;
+}
+
+#reporte .page-header {
+  min-height: 37px;
+  margin-bottom: 18px;
+}
+
+#reporte .page-header h1 {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.35px;
+}
+
+#reporte .month-picker {
+  min-height: 40px;
+  margin-bottom: 7px;
+  padding: 0 12px;
+  gap: 10px;
+  border-radius: 14px;
+  background: rgba(255, 250, 243, 0.96);
+  box-shadow: 0 5px 15px rgba(60, 48, 32, 0.06);
+}
+
+#reporte .month-picker > img {
+  width: 23px;
+  height: 23px;
+  flex: 0 0 23px;
+  object-fit: contain;
+  background: transparent;
+}
+
+#reporte .month-picker input {
+  min-width: 0;
+  min-height: 38px;
+  font-size: 13px;
+  color: #172438;
+}
+
+/* La ilustración se centra y se recorta dentro de su propia zona. */
+#reporte .report-illustration {
+  position: relative;
+  display: block;
+  height: 170px;
+  margin: 0 -3px 7px;
+  overflow: hidden;
+  background: transparent;
+}
+
+#reporte .report-illustration img {
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: auto;
+  max-width: none;
+  transform: translate(-50%, -50%);
+  object-fit: contain;
+  background: transparent;
+}
+
+/* Texto centrado como en la referencia */
+#reporte .report-intro {
+  margin: 0 4px 16px;
+  text-align: center;
+}
+
+#reporte .report-intro h2 {
+  margin: 0 0 6px;
+  font-size: 16px;
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: -0.35px;
+}
+
+#reporte .report-intro p {
+  margin: 0;
+  color: #51575b;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* Botón principal */
+#reporte .report-button {
+  min-height: 47px;
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  margin: 0 0 11px;
+  padding: 6px 10px 6px 14px;
+  border-radius: 16px;
+  background: linear-gradient(110deg, #315947, #102f24);
+  color: #fffdf6;
+  font-size: 12px;
+  box-shadow: 0 7px 15px rgba(26, 59, 45, 0.14);
+}
+
+#reporte .report-button > img {
+  display: block;
+  width: 23px;
+  height: 23px;
+  flex: 0 0 23px;
+  object-fit: contain;
+  background: transparent;
+}
+
+#reporte .report-button > span:nth-child(2) {
+  flex: 1;
+  text-align: left;
+}
+
+#reporte .report-button .button-arrow {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  margin-left: auto;
+  border-radius: 50%;
+  background: #f0e2c2;
+  color: #203a2d;
+  font-size: 24px;
+}
+
+/* Resumen mensual */
+#reporte .report-summary {
+  padding: 12px 12px 13px;
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 19px;
+  background: rgba(255, 250, 243, 0.96);
+  box-shadow: 0 6px 17px rgba(67, 54, 35, 0.045);
+}
+
+#reporte .report-summary h2 {
+  margin: 0 0 10px;
+  font-size: 12px;
+  line-height: 1.35;
+  font-weight: 700;
+  text-transform: none;
+}
+
+#reporte .report-summary-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0;
+}
+
+#reporte .report-metric {
+  min-width: 0;
+  padding: 0 8px;
+}
+
+#reporte .report-metric:first-child {
+  padding-left: 0;
+  border-right: 1px solid rgba(88, 75, 53, 0.12);
+}
+
+#reporte .report-metric:last-child {
+  padding-right: 0;
+  padding-left: 10px;
+}
+
+#reporte .metric-heading {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 27px;
+  margin-bottom: 3px;
+}
+
+#reporte .metric-heading img {
+  display: block;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  object-fit: contain;
+  background: transparent;
+}
+
+#reporte .metric-heading span {
+  min-width: 0;
+  font-size: 9px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+#reporte .report-metric > strong {
+  display: block;
+  margin: 2px 0 4px;
+  font-size: 21px;
+  line-height: 1.1;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+#reporte .report-metric > small {
+  display: block;
+  font-size: 12px;
+  line-height: 1.35;
+  font-weight: 600;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+#reporte .report-grand-total {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(88, 75, 53, 0.12);
+}
+
+#reporte .report-grand-total > img {
+  display: block;
+  width: 43px;
+  height: 43px;
+  flex: 0 0 43px;
+  padding: 7px;
+  border-radius: 11px;
+  background: #f4e7d2;
+  object-fit: contain;
+}
+
+#reporte .report-grand-total > div {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+#reporte .report-grand-total span {
+  color: #62645f;
+  font-size: 10px;
+  line-height: 1.3;
+}
+
+#reporte .report-grand-total strong {
+  color: #111c31;
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.55px;
+  font-variant-numeric: tabular-nums;
+}
+
+#reporte .report-grand-total small {
+  color: #77776f;
+  font-size: 10px;
+  line-height: 1.2;
+}
+
+#reporte #mensaje-reporte {
+  min-height: 0;
+  margin: 5px 2px 0;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+#reporte #mensaje-reporte:empty,
+#reporte #mensaje-reporte[hidden] {
+  display: none;
+}
+
+/* CONFIRMACIÓN */
+
+.confirmation-screen {
+  position: relative;
+  min-height: 100dvh;
+  padding: 70px 20px 32px;
+  overflow: hidden;
+  color: white;
+  background: #263a36;
+}
+
+.confirmation-background,
+.confirmation-shade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.confirmation-background {
+  object-fit: cover;
+}
+.confirmation-shade {
+  background: linear-gradient(
+    180deg,
+    rgba(13, 25, 29, 0.16),
+    rgba(9, 25, 22, 0.6)
+  );
+}
+
+.confirmation-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: calc(100dvh - 102px);
+  text-align: center;
+}
+
+.confirmation-art {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 250px;
+  margin-bottom: 12px;
+}
+.confirmation-document {
+  width: 235px;
+  height: 235px;
+  object-fit: contain;
+}
+.confirmation-check {
+  position: absolute;
+  right: 19%;
+  bottom: 18px;
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.confirmation-content h1 {
+  margin: 0 0 10px;
+  font-size: 26px;
+  letter-spacing: -0.8px;
+}
+.confirmation-content > p {
+  max-width: 290px;
+  margin: 0 auto 27px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.confirmation-button {
+  width: 100%;
+  min-height: 65px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 12px 17px;
+  margin-top: 10px;
+  border-radius: 18px;
+  font-size: 15px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.confirmation-button > img {
+  width: 31px;
+  height: 31px;
+  object-fit: contain;
+}
+.confirmation-button > span:nth-child(2) {
+  flex: 1;
+}
+.confirmation-button.dark {
+  color: white;
+  background: rgba(19, 52, 40, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.confirmation-button.light {
+  color: var(--ink);
+  background: rgba(255, 249, 239, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+.confirmation-button .action-arrow {
+  margin-left: auto;
+}
+.home-button-symbol {
+  width: 31px;
+  text-align: center;
+  font-size: 28px;
+}
+
+.confirmation-screen.active ~ .bottom-nav {
+  display: none;
+}
+
+/* BARRA INFERIOR */
+
+.bottom-nav {
+  position: fixed;
+  z-index: 20;
+  bottom: max(9px, env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(400px, calc(100% - 24px));
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 3px;
+  padding: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 25px;
+  background: rgba(255, 251, 245, 0.92);
+  box-shadow: 0 9px 30px rgba(44, 38, 27, 0.13);
+  backdrop-filter: blur(22px);
+}
+
+.nav-item {
+  min-width: 0;
+  min-height: 58px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 4px 1px;
+  border: 0;
+  border-radius: 16px;
+  color: #777a78;
+  background: transparent;
+}
+
+.nav-icon {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+}
+.nav-icon img {
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
+}
+.nav-item small {
+  font-size: 10px;
+  line-height: 1.2;
+}
+
+.nav-item.active {
+  color: var(--green);
+  background: #e5e9dd;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 360px) {
+  .home-hero {
+    height: 490px;
+  }
+  .home-action {
+    min-height: 86px;
+    gap: 10px;
+    padding: 10px;
+  }
+  .home-action-icon {
+    width: 55px;
+    height: 55px;
+    flex-basis: 55px;
+  }
+  .home-action-copy strong {
+    font-size: 13px;
+  }
+  .home-action-copy small {
+    font-size: 10px;
+  }
+  .inner-screen {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+  .trip-row {
+    grid-template-columns: 43px 28px minmax(0, 1fr) auto 8px;
+    gap: 5px;
+    padding: 6px;
+  }
+  .trip-service-icon {
+    width: 27px;
+    height: 27px;
+  }
+  .trip-amount {
+    font-size: 10px;
+  }
+  .metric-heading span {
+    font-size: 9px;
+  }
+  .report-metric > small {
+    font-size: 11px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    padding: 20px 0;
+  }
+  #app {
+    min-height: calc(100dvh - 40px);
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    border-radius: 35px;
+    box-shadow: 0 20px 65px rgba(49, 42, 29, 0.12);
+  }
+  .screen {
+    min-height: calc(100dvh - 40px);
+  }
+  .bottom-nav {
+    bottom: 28px;
+  }
+}
+
+/* Tipografía refinada */
+body {
+  font-family:
+    "Manrope",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  letter-spacing: -0.25px;
+}
+
+.hero-greeting {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 43px;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -1px;
+}
+
+.hero-brand strong {
+  font-weight: 700;
+  letter-spacing: -0.45px;
+}
+
+.home-action-copy strong,
+.page-header h1,
+.section-title {
+  font-weight: 700;
+  letter-spacing: -0.45px;
+}
+
+.home-action-copy small {
+  font-size: 11.5px;
+  letter-spacing: 0;
+}
+
+/* =========================================================
+   AJUSTE VISUAL: PESTAÑA VIAJES DEL MES
+   Mantiene intactas Inicio, Registrar y Reporte.
+   ========================================================= */
+#viajes.inner-screen {
+  padding-top: max(42px, env(safe-area-inset-top));
+  padding-right: 17px;
+  padding-left: 17px;
+  padding-bottom: 112px;
+}
+
+#viajes .page-header {
+  margin-bottom: 25px;
+}
+
+#viajes .month-picker {
+  min-height: 57px;
+  margin-bottom: 14px;
+  padding: 0 14px;
+  border-radius: 18px;
+}
+
+#viajes .month-picker > img {
+  width: 26px;
+  height: 26px;
+  flex: 0 0 26px;
+  object-fit: contain;
+  background: transparent;
+}
+
+#viajes .month-picker input {
+  font-size: 15px;
+  min-height: 55px;
+}
+
+/* Cada registro se presenta como una tarjeta independiente. */
+#viajes .trip-list {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+}
+
+#viajes .trip-row {
+  display: grid;
+  grid-template-columns: 39px 31px minmax(0, 1fr) auto 10px;
+  align-items: center;
+  column-gap: 8px;
+  min-height: 53px;
+  padding: 5px 8px 5px 6px;
+  border: 1px solid rgba(255, 255, 255, 0.82);
+  border-radius: 14px;
+  background: rgba(255, 250, 243, 0.82);
+  box-shadow: 0 3px 9px rgba(71, 57, 37, 0.035);
+}
+
+#viajes .trip-date {
+  width: 39px;
+  min-height: 43px;
+  padding: 3px 1px;
+  border-radius: 11px;
+  background: #f3e7d4;
+  color: #152136;
+}
+
+#viajes .trip-date small {
+  font-size: 9px;
+  line-height: 1.1;
+  font-weight: 500;
+  letter-spacing: 0.1px;
+}
+
+#viajes .trip-date strong {
+  font-size: 17px;
+  line-height: 1.1;
+  font-weight: 600;
+}
+
+#viajes .trip-service-icon {
+  display: block;
+  width: 29px;
+  height: 29px;
+  object-fit: contain;
+  background: transparent;
+}
+
+#viajes .trip-description {
+  min-width: 0;
+  overflow: hidden;
+}
+
+#viajes .trip-description strong {
+  display: block;
+  overflow: hidden;
+  color: #172438;
+  font-size: 11px;
+  line-height: 1.25;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#viajes .trip-description small {
+  display: none;
+}
+
+#viajes .trip-amount {
+  color: #172438;
+  font-size: 10.5px;
+  line-height: 1.2;
+  font-weight: 500;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+#viajes .trip-chevron {
+  display: block;
+  color: #183c32;
+  font-size: 19px;
+  line-height: 1;
+  text-align: right;
+}
+
+#viajes .empty-state {
+  padding: 25px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 16px;
+  background: rgba(255, 250, 243, 0.72);
+  font-size: 12px;
+}
+
+/* Resumen fijado en el flujo, debajo de las tarjetas. */
+#viajes .monthly-total {
+  margin-top: 14px;
+  padding: 15px 16px;
+  gap: 7px 12px;
+  border-radius: 18px;
+  background: rgba(255, 250, 243, 0.94);
+}
+
+#viajes .monthly-total > span {
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+#viajes .monthly-total > strong {
+  font-size: 15px;
+  line-height: 1.3;
+  font-variant-numeric: tabular-nums;
+}
+
+#viajes .monthly-total-divider {
+  margin: 4px 0;
+}
+
+#viajes #mensaje-consulta {
+  min-height: 0;
+  margin: 4px 2px 0;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+#viajes #mensaje-consulta:empty,
+#viajes #mensaje-consulta[hidden] {
+  display: none;
+}
+
+@media (max-width: 360px) {
+  #viajes.inner-screen {
+    padding-right: 13px;
+    padding-left: 13px;
+  }
+
+  #viajes .trip-row {
+    grid-template-columns: 36px 27px minmax(0, 1fr) auto 8px;
+    column-gap: 6px;
+    padding-right: 6px;
+  }
+
+  #viajes .trip-date {
+    width: 36px;
+  }
+
+  #viajes .trip-service-icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  #viajes .trip-amount {
+    font-size: 9.5px;
+  }
+}
+
+/* =========================================================
+   AJUSTE VISUAL: PESTAÑA REPORTES
+   No modifica Inicio, Registrar ni Viajes del mes.
+   ========================================================= */
+
+#reporte.report-screen {
+  padding: max(25px, env(safe-area-inset-top)) 17px 112px;
+}
+
+#reporte .page-header {
+  min-height: 37px;
+  margin-bottom: 20px;
+}
+
+#reporte .page-header h1 {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.35px;
+}
+
+#reporte .month-picker {
+  min-height: 40px;
+  margin-bottom: 9px;
+  padding: 0 12px;
+  gap: 10px;
+  border-radius: 14px;
+  background: rgba(255, 250, 243, 0.94);
+  box-shadow: 0 5px 15px rgba(60, 48, 32, 0.06);
+}
+
+#reporte .month-picker > img {
+  width: 23px;
+  height: 23px;
+  flex: 0 0 23px;
+  object-fit: contain;
+  background: transparent;
+}
+
+#reporte .month-picker input {
+  min-width: 0;
+  min-height: 38px;
+  font-size: 13px;
+  color: #172438;
+}
+
+/* Ilustración principal */
+#reporte .report-illustration {
+  display: grid;
+  place-items: center;
+  height: 224px;
+  margin: 0 -1px 7px;
+  overflow: hidden;
+  background: transparent;
+}
+
+#reporte .report-illustration img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: transparent;
+}
+
+/* Título y descripción */
+#reporte .report-intro {
+  margin: 0 5px 17px;
+  text-align: left;
+}
+
+#reporte .report-intro h2 {
+  margin: 0 0 6px;
+  font-size: 16px;
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: -0.35px;
+}
+
+#reporte .report-intro p {
+  margin: 0;
+  color: #51575b;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* Botón Generar reporte */
+#reporte .report-button {
+  min-height: 47px;
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  margin: 0 0 11px;
+  padding: 6px 10px 6px 14px;
+  border-radius: 16px;
+  background: linear-gradient(110deg, #315947, #102f24);
+  color: #fffdf6;
+  font-size: 12px;
+  box-shadow: 0 7px 15px rgba(26, 59, 45, 0.14);
+}
+
+#reporte .report-button > img {
+  display: block;
+  width: 23px;
+  height: 23px;
+  flex: 0 0 23px;
+  object-fit: contain;
+  background: transparent;
+}
+
+#reporte .report-button > span:nth-child(2) {
+  flex: 1;
+  text-align: left;
+}
+
+#reporte .report-button .button-arrow {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  margin-left: auto;
+  border-radius: 50%;
+  background: #f0e2c2;
+  color: #203a2d;
+  font-size: 24px;
+}
+
+/* Tarjeta del resumen */
+#reporte .report-summary {
+  padding: 12px 12px 13px;
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 19px;
+  background: rgba(255, 250, 243, 0.96);
+  box-shadow: 0 6px 17px rgba(67, 54, 35, 0.045);
+}
+
+#reporte .report-summary h2 {
+  margin: 0 0 10px;
+  font-size: 12px;
+  line-height: 1.35;
+  font-weight: 700;
+  text-transform: none;
+}
+
+/* Métricas de Frío y Abarrotes */
+#reporte .report-summary-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0;
+}
+
+#reporte .report-metric {
+  min-width: 0;
+  padding: 0 8px;
+}
+
+#reporte .report-metric:first-child {
+  padding-left: 0;
+  border-right: 1px solid rgba(88, 75, 53, 0.12);
+}
+
+#reporte .report-metric:last-child {
+  padding-right: 0;
+  padding-left: 10px;
+}
+
+#reporte .metric-heading {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 27px;
+  margin-bottom: 3px;
+}
+
+#reporte .metric-heading img {
+  display: block;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  object-fit: contain;
+  background: transparent;
+}
+
+#reporte .metric-heading span {
+  min-width: 0;
+  font-size: 9px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+#reporte .report-metric > strong {
+  display: block;
+  margin: 2px 0 4px;
+  font-size: 21px;
+  line-height: 1.1;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+#reporte .report-metric > small {
+  display: block;
+  font-size: 12px;
+  line-height: 1.35;
+  font-weight: 600;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Total general */
+#reporte .report-grand-total {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(88, 75, 53, 0.12);
+}
+
+#reporte .report-grand-total > img {
+  display: block;
+  width: 43px;
+  height: 43px;
+  flex: 0 0 43px;
+  padding: 7px;
+  border-radius: 11px;
+  background: #f4e7d2;
+  object-fit: contain;
+}
+
+#reporte .report-grand-total > div {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+#reporte .report-grand-total span {
+  color: #62645f;
+  font-size: 10px;
+  line-height: 1.3;
+}
+
+#reporte .report-grand-total strong {
+  color: #111c31;
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.55px;
+  font-variant-numeric: tabular-nums;
+}
+
+#reporte .report-grand-total small {
+  color: #77776f;
+  font-size: 10px;
+  line-height: 1.2;
+}
+
+/* Mensajes de estado */
+#reporte #mensaje-reporte {
+  margin: 5px 2px 0;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+#reporte #mensaje-reporte:empty,
+#reporte #mensaje-reporte[hidden] {
+  display: none;
+}
+
+/* Pantallas estrechas */
+@media (max-width: 360px) {
+  #reporte.report-screen {
+    padding-right: 13px;
+    padding-left: 13px;
+  }
+
+  #reporte .report-illustration {
+    height: 205px;
+  }
+
+  #reporte .report-summary {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  #reporte .metric-heading {
+    gap: 3px;
+  }
+
+  #reporte .metric-heading img {
+    width: 21px;
+    height: 21px;
+    flex-basis: 21px;
+  }
+
+  #reporte .metric-heading span {
+    font-size: 8px;
+  }
+
+  #reporte .report-metric > small {
+    font-size: 10px;
+  }
+
+  #reporte .report-grand-total strong {
+    font-size: 20px;
+  }
+}
+
+/* Ajustes de Reportes en móviles estrechos */
+@media (max-width: 360px) {
+  #reporte.report-screen {
+    padding-right: 13px;
+    padding-left: 13px;
+  }
+
+  #reporte .report-illustration {
+    height: 158px;
+  }
+
+  #reporte .report-summary {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  #reporte .metric-heading {
+    gap: 3px;
+  }
+
+  #reporte .metric-heading img {
+    width: 21px;
+    height: 21px;
+    flex-basis: 21px;
+  }
+
+  #reporte .metric-heading span {
+    font-size: 8px;
+  }
+
+  #reporte .report-metric > small {
+    font-size: 10px;
+  }
+
+  #reporte .report-grand-total strong {
+    font-size: 20px;
+  }
+}
+
+/* UNIFICAR COLOR Y TAMAÑO DE LOS ICONOS DEL MENU */
+.bottom-nav .nav-item .nav-icon img {
+  width: 21px !important;
+  height: 21px !important;
+  object-fit: contain;
+  filter: none !important;
+}
+
+.bottom-nav .nav-item.active .nav-icon img {
+  filter: brightness(0) saturate(100%) invert(23%) sepia(15%) saturate(1250%)
+    hue-rotate(108deg) brightness(85%) contrast(90%) !important;
+}
+
+/* REPORTES: aumentar escala visual para igualar las otras pestañas */
+#reporte .page-header h1 {
+  font-size: 18px;
+}
+
+#reporte .month-picker {
+  min-height: 44px;
+  padding: 0 14px;
+}
+
+#reporte .month-picker input {
+  font-size: 14px;
+}
+
+/* Dar más presencia a la ilustración central */
+#reporte .report-illustration {
+  height: 205px;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+#reporte .report-illustration img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Título y descripción */
+#reporte .report-intro {
+  margin: 0 5px 18px;
+}
+
+#reporte .report-intro h2 {
+  font-size: 18px;
+  line-height: 1.35;
+  margin-bottom: 7px;
+}
+
+#reporte .report-intro p {
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+/* Botón principal */
+#reporte .report-button {
+  min-height: 54px;
+  padding: 7px 12px 7px 16px;
+  gap: 12px;
+  font-size: 14px;
+  border-radius: 17px;
+}
+
+#reporte .report-button > img {
+  width: 26px;
+  height: 26px;
+  flex-basis: 26px;
+}
+
+#reporte .report-button .button-arrow {
+  width: 36px;
+  height: 36px;
+  flex-basis: 36px;
+  font-size: 27px;
+}
+
+/* Resumen mensual */
+#reporte .report-summary {
+  padding: 15px 14px 16px;
+  border-radius: 20px;
+}
+
+#reporte .report-summary h2 {
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+#reporte .metric-heading {
+  min-height: 30px;
+  gap: 6px;
+}
+
+#reporte .metric-heading img {
+  width: 27px;
+  height: 27px;
+  flex-basis: 27px;
+}
+
+#reporte .metric-heading span {
+  font-size: 11px;
+}
+
+#reporte .report-metric > strong {
+  font-size: 24px;
+  margin: 4px 0;
+}
+
+#reporte .report-metric > small {
+  font-size: 13px;
+}
+
+/* Total del mes */
+#reporte .report-grand-total {
+  gap: 12px;
+  margin-top: 14px;
+  padding-top: 14px;
+}
+
+#reporte .report-grand-total > img {
+  width: 48px;
+  height: 48px;
+  flex-basis: 48px;
+}
+
+#reporte .report-grand-total span {
+  font-size: 12px;
+}
+
+#reporte .report-grand-total strong {
+  font-size: 25px;
+}
+
+@media (max-width: 360px) {
+  #reporte .report-illustration {
+    height: 175px;
+  }
+
+  #reporte .report-intro h2 {
+    font-size: 16px;
+  }
+
+  #reporte .report-intro p {
+    font-size: 12px;
+  }
+
+  #reporte .report-metric > small {
+    font-size: 11px;
+  }
+
+  #reporte .report-grand-total strong {
+    font-size: 22px;
+  }
+}
+
+/* CORRECCIÓN PUNTUAL: selectores de mes en Viajes y Reporte.
+   Mantiene el calendario izquierdo y reemplaza el icono nativo derecho
+   por una flecha hacia abajo. El campo Fecha del viaje no se modifica. */
+#viajes .month-picker,
+#reporte .month-picker {
+  position: relative;
+}
+
+#viajes .month-picker input[type="month"],
+#reporte .month-picker input[type="month"] {
+  padding-right: 25px;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+#viajes .month-picker input[type="month"]::-webkit-calendar-picker-indicator,
+#reporte .month-picker input[type="month"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  width: 24px;
+  height: 100%;
+  cursor: pointer;
+}
+
+#viajes .month-picker::after,
+#reporte .month-picker::after {
+  content: "";
+  position: absolute;
+  right: 17px;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-right: 1.8px solid var(--green);
+  border-bottom: 1.8px solid var(--green);
+  transform: translateY(-70%) rotate(45deg);
+  pointer-events: none;
+}
+
+/* AJUSTE PUNTUAL DE ICONOS DE FECHA Y MES — sin alterar el resto del diseño */
+
+/* Flecha visible y pulsable en selectores de mes */
+#viajes .month-picker,
+#reporte .month-picker {
+  position: relative;
+}
+
+#viajes .month-picker input[type="month"],
+#reporte .month-picker input[type="month"] {
+  padding-right: 44px;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+#viajes .month-picker input[type="month"]::-webkit-calendar-picker-indicator,
+#reporte .month-picker input[type="month"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
+#viajes .month-picker::after,
+#reporte .month-picker::after {
+  content: none !important;
+}
+
+#viajes .month-arrow,
+#reporte .month-arrow {
+  position: absolute;
+  z-index: 2;
+  right: 8px;
+  top: 50%;
+  width: 34px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#viajes .month-arrow::after,
+#reporte .month-arrow::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-right: 1.7px solid var(--green);
+  border-bottom: 1.7px solid var(--green);
+  transform: translateY(-2px) rotate(45deg);
+}
+
+/* Registrar: flecha pulsable, conservando el selector nativo de fecha */
+#registrar .date-input-wrap {
+  position: relative;
+  width: 100%;
+}
+
+#registrar .date-input-wrap #fecha {
+  display: block;
+  width: 100%;
+  padding-right: 48px;
+}
+
+#registrar .date-input-wrap #fecha::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
+#registrar .date-arrow {
+  position: absolute;
+  z-index: 2;
+  right: 8px;
+  top: 50%;
+  width: 34px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#registrar .date-arrow::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-right: 1.7px solid var(--green);
+  border-bottom: 1.7px solid var(--green);
+  transform: translateY(-2px) rotate(45deg);
+}
+
+/* Los iconos SVG de calendario son transparentes y conservan tamaño consistente */
+.section-label img[src$="calendario_lineal_transparente.svg"],
+.month-picker img[src$="calendario_lineal_transparente.svg"] {
+  background: transparent !important;
+  object-fit: contain;
+}
+
+/* Tarjeta de confirmación de viaje */
+.mensaje-viaje {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 12px;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 18px;
+  background: linear-gradient(135deg, #f1eee2, #e7e5d5);
+  color: #173d32;
+  box-shadow: 0 5px 14px rgba(55, 48, 32, 0.06);
+}
+
+.mensaje-viaje[hidden] {
+  display: none !important;
+}
+
+.mensaje-viaje-icono {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 38px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #294b3e;
+  color: #f8f2e5;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.mensaje-viaje-contenido {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.mensaje-viaje-contenido strong {
+  color: #214638;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.mensaje-viaje-contenido span {
+  color: #6d7168;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* TARJETA DE CONFIRMACIÓN AL REGISTRAR UN VIAJE */
+.mensaje-viaje {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  min-height: 112px;
+  margin-top: -8px;
+  padding: 20px 24px;
+  box-sizing: border-box;
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.24);
+  color: #214638;
+}
+
+.mensaje-viaje[hidden] {
+  display: none !important;
+}
+
+.mensaje-viaje-icono {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 64px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #294b3e;
+  color: #fffdf5;
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.mensaje-viaje-separador {
+  align-self: stretch;
+  flex: 0 0 2px;
+  min-height: 64px;
+  background: #9b9e88;
+}
+
+.mensaje-viaje-contenido {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  min-width: 0;
+}
+
+.mensaje-viaje-contenido strong {
+  color: #214638;
+  font-size: 18px;
+  line-height: 1.35;
+  font-weight: 700;
+}
+
+.mensaje-viaje-contenido span {
+  color: #73766f;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+@media (max-width: 480px) {
+  .mensaje-viaje {
+    gap: 12px;
+    min-height: 88px;
+    padding: 14px 16px;
+    border-radius: 24px;
+  }
+
+  .mensaje-viaje-icono {
+    flex-basis: 48px;
+    width: 48px;
+    height: 48px;
+    font-size: 32px;
+  }
+
+  .mensaje-viaje-separador {
+    min-height: 48px;
+  }
+
+  .mensaje-viaje-contenido strong {
+    font-size: 14px;
+  }
+
+  .mensaje-viaje-contenido span {
+    font-size: 12px;
+  }
+}
